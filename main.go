@@ -10,6 +10,11 @@ type Value struct {
 }
 
 // Node is a node in 2-3 tree
+//
+// A 2-node must have its value set in Val1, and with its Val2 set to nil
+// and its subtrees (if exists) saved in Left / Mid, with its Right node set to nil
+//
+// Parent is just a helper node for insertion and deletion
 type Node struct {
 	Val1   *Value
 	Val2   *Value
@@ -111,7 +116,7 @@ func (node *Node) Insert(val int) *Node {
 }
 
 func (node *Node) innerInsert(val int) {
-	//insertion only happens on nodes. So if current node is not leaf, insert the new value to the subtree
+	//insertion only happens on leaves. So if current node is not a leaf, insert the new value to the corresponding subtree
 	if node.Left != nil {
 		// current node is not leaf
 		if node.Val1.Val > val {
